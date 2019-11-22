@@ -1,0 +1,26 @@
+<?php
+class dustdust{
+ public $link='';
+ function __construct($dust1,$dust2,$dust3,$dust4){
+  $this->connect();
+  $this->storeInDB($dust1,$dust2,$dust3,$dust4);
+ }
+ 
+ function connect(){
+  $this->link=mysqli_connect('localhost','root','')or die('Cannot connect to the DB');
+  mysqli_select_db($this->link,'tempdust2') or die ('Cannot select the DB');
+ }
+ 
+ function storeInDB($dust1, $dust2,$dust3,$dust4){
+  $query = "insert into dustdust set dust1='".$dust1."', dust2='".$dust2."', dust3='".$dust3."', dust4='".$dust4."'";
+  $result=mysqli_query($this->link,$query) or die('Errant query: '.$query);
+ }
+ 
+}
+if($_GET['dust1']!=''and $_GET['dust2']!=''and $_GET['dust3']!=''and $_GET['dust4']!=''){
+ $dustdust=new dustdust($_GET['dust1'],$_GET['dust2'],$_GET['dust3'],$_GET['dust4']);
+ }
+ 
+
+ ?>
+ 
